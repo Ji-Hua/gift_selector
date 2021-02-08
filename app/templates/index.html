@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <img src="{{url_for('static', filename='logo.png')}}" width=256>
+            </div>
+            <div class="col-lg-8">
+                <h2>烂柯游艺社</h2>
+                <p class="index-text"><strong>北美最专业的狼人杀社团</strong></p>
+                <p class="index-text">本社于2019年3月创立于哈佛大学，最初在波士顿地区举行线下活动。
+                    烂柯的名字出自南朝梁任昉《述异记》：晋代王质观战棋弈，流连忘返，以至于斧子柄都烂掉了。
+                    我们取名于此，希望本社的活动也能让大家沉浸推理与表演之中，忘万千于一瞬。
+                </p>
+                
+                <p class="index-text">
+                    本社至今已举办了三届“金狼杯”狼人杀联赛，一届“魁狼杯”狼人杀邀请赛，逾百人参与了我们的活动，
+                    超过40个不同的游戏板子，60多个角色轮番上阵，更有异形、侍僧、牧师等原创的角色。
+                    疫情期间，我们仍然通过线上组织狼人杀比赛，连接北美和国内各个地区的各路狼人杀爱好者，
+                    继续为广大狼人杀爱好者带来惊喜与欢乐。
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <h4>微信公众号：烂柯游艺社</h4>
+                <a href="https://mp.weixin.qq.com/s/kDuVc37NRZxM55dKwvZ3sw">
+                    <img class="index-outerlink-img" src="static/images/lanke_wechat.jpg" width=256 height=256>
+                </a>
+            </div>
+            <a href="https://www.zhihu.com/column/c_1158046349202284544">
+                <div class="col-lg-4">
+                    <h4>知乎专栏：烂柯小讲堂</h4>
+                    <img class="index-outerlink-img" src="static/images/lanke_classroom.png" width=256 height=256>
+                </div>
+            </a>
+            <div class="col-lg-4">
+                <h4>微信号：烂柯小助手</p>
+                <img class="index-outerlink-img" src="static/images/lanke_assistant.jpg" width=256 height=256>
+            </div>
+        </div>
+    </div>
+{% endblock %}
