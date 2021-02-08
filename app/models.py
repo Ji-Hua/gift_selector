@@ -14,7 +14,15 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import db, login
 
+class Role(db.Model):
+    __tablename__ = 'roles'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), unique=True)
+    def __repr__(self):
+        return f"<Role {self.name}>"
+
 class User(UserMixin, db.Model):
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
