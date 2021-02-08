@@ -1,8 +1,5 @@
 from collections import defaultdict
 from datetime import datetime
-import os
-import json
-import random
 from time import time
 
 from flask import current_app

@@ -8,7 +8,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail
 from flask_restful import Api
-from flask_socketio import SocketIO
 
 from config import config
 
@@ -18,7 +17,6 @@ login = LoginManager()
 # login view should be the right login function
 login.login_view = 'auth.login'
 mail = Mail()
-socketio = SocketIO()
 bootstrap = Bootstrap()
 
 
@@ -40,8 +38,6 @@ def create_app(config_name):
     login.init_app(app)
 
     mail.init_app(app)
-
-    socketio.init_app(app)
 
     bootstrap.init_app(app)
 
