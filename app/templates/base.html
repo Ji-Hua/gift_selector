@@ -18,26 +18,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
     {% if title %}
-    <title>烂柯游艺社-{{ title }}</title>
+    <title>猪猪礼物罐-{{ title }}</title>
     {% else %}
-    <title>烂柯游艺社</title>
+    <title>猪猪礼物罐</title>
     {% endif %}
 {% endblock %}
 
 {% block navbar %}
-    <img class="logo" src="{{url_for('static', filename='logo.png')}}">    
-    <div class="banner">
-        <p>
-            <span class="chinesecursive bannertext">烂柯游艺社<br></span>
-            <span class="bannertext">Lanke Board Game Club</span>
-        </p>
-    </div>
-    <nav class="navbar navbar-light nounderline" style="background-color: #ffffff;">
+    <!-- <img class="logo" src="{{url_for('static', filename='logo.png')}}">     -->
+    <nav class="navbar navbar-light nounderline">
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
                 <li class='nav-item'><a href="{{ url_for('main.index') }}" class='nounderline'>首页</a></li>
-                <li class='nav-item'><a href="{{ url_for('game.game') }}">游戏</a></li>
-                <li class='nav-item'><a href="{{ url_for('character.character_intros') }}">角色</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <p class="navbar-text">登录为 {{ current_user.username }}</p>
@@ -66,8 +58,8 @@
     {% block footer %}
         <footer id='footer'>
             <div class="banner">
-                <p class="bannertext">烂柯游艺社 Email: werewolf.assistant@gmail.com</p>
-                <p class="bannertext"><small>&copy; Copyright 2019-2021, Lanke Board Game Club</small></p>
+                <p class="bannertext">傻猪猪与臭猪猪</p>
+                <p class="bannertext"><small>&copy; Copyright 2021, Piggy&Piggy</small></p>
             </div>
         </footer> 
     {% endblock %}
