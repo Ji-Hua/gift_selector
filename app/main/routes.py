@@ -1,8 +1,7 @@
-from flask import render_template
-
+from flask import render_template, flash, redirect, url_for, request
+from flask_login import current_user, login_user, logout_user, login_required
 
 from app import login
-from flask_login import current_user, login_user, logout_user, login_required
 from app.main import bp
 from app.forms import LoginForm
 
@@ -10,7 +9,9 @@ from app.forms import LoginForm
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    return render_template('index.html', title='首页')
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    return redirect(url_for('auth.login'))
 
 
 # TODO: add logging and email

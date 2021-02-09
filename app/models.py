@@ -15,9 +15,35 @@ class Role(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
+    validation_hash = db.Column(db.String(128))
+    is_admin = db.Column(db.Boolean, default=False)
     users = db.relationship('User', backref='role')
+
+    @staticmethod
+    def insert_roles():
+        roles = {
+            'SillyPiggy': ("19921003", False),
+            'StinkyPiggy': ("19930125", True)
+        }
+        for r in roles:
+            role = Role.query.filter_by(name=r).first()
+            if role is None:
+                role = Role(name=r)
+                role.validation_hash = generate_password_hash(roles[r][0])
+                role.is_admin = roles[r][1]
+                db.session.add(role)
+            db.session.commit()
+
+    def check_validation_hash(self, input):
+        return check_password_hash(self.validation_hash, input)
+    
+    @property
+    def validation_hash(self):
+        raise AttributeError('validation_hash is not a readable attribute')
+
     def __repr__(self):
         return f"<Role {self.name}>"
+
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'

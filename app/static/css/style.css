@@ -1,0 +1,69 @@
+:root {
+    --backColor: #C055A5;
+    --frontColor: #FDF2C4;
+    --clickable: #ff8299;
+}
+
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#header {
+    padding-top: 10vw;
+    align-content: center;
+    text-align: center;
+}
+
+.logo {
+    width: 150px;
+}
+
+.banner {
+    background-color: var(--backColor);
+    padding: 10px 0 8px 0;
+    margin: 5px 0;
+}
+
+.bannertext {
+    color: white;
+}
+
+.highlight {
+    font-weight: 600;
+    color: var(--backColor);
+}
+
+.chinesecursive {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+p {
+    margin: 0px;
+}
+
+a {
+    color: var(--clickable);
+    border-bottom: 1px solid currentColor; 
+    text-decoration: none;
+}
+
+table {
+    align-content: center;
+    text-align: center;
+}
+
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+  }
+  
+.navbar {
+    text-align: center;
+}
