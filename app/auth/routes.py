@@ -1,8 +1,6 @@
-import time
 from urllib.parse import unquote
 
-from flask import render_template, flash, redirect, url_for, request, \
-    jsonify, copy_current_request_context, session, Blueprint
+from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 

@@ -58,35 +58,16 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-    
-    def role_in_room(self, room_name):
-        room = Room.query.filter_by(name=room_name).first()
-        roles = self.role.all()
-        for role in roles:
-            if role.room_id == room.id:
-                return role
-        else:
-            return None
-    
-    def is_host(self, room_name):
-        role = self.role_in_room(room_name)
-        if role is not None:
-            return role.is_host
-        else:
-            return False
 
-    def current_role(self, room_name):
-        room_id = Room.query.filter_by(name=room_name).first().id
-        return self.role.filter_by(room_id=room_id).first()
-    
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
         return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
 
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode(
-            {'reset_password': self.id, 'exp': time() + expires_in},
-            current_app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+                {'reset_password': self.id, 'exp': time() + expires_in},
+                current_app.config['SECRET_KEY'], algorithm='HS256'
+            )
     
     @staticmethod
     def verify_reset_password_token(token):

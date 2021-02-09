@@ -10,6 +10,7 @@ from flask_mail import Mail
 from flask_restful import Api
 
 from config import config
+import pdb
 
 api = Api()
 db = SQLAlchemy()
@@ -26,6 +27,7 @@ def create_app(config_name):
     Return an instance of application with configuations passed in
     """
     app = Flask(__name__)
+
     # read environment config from config.py
     app.config.from_object(config[config_name])
 
@@ -33,7 +35,7 @@ def create_app(config_name):
     api.init_app(app)
 
     db.init_app(app)
-    migrate = Migrate(app, db) # update migrate
+    # migrate = Migrate(app, db) # update migrate
 
     login.init_app(app)
 
