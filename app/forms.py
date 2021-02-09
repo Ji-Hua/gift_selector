@@ -1,17 +1,18 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 
 class LoginForm(FlaskForm):
-    username = RadioField('你是谁？', choices=["傻猪", "臭猪"])
+    username = RadioField('你是谁？', choices=["傻猪", "臭猪"], validators=[DataRequired()])
     password = PasswordField('密码', validators=[DataRequired()])
     remember_me = BooleanField('保持登录')
     submit = SubmitField('登录')
 
 
 class RegistrationForm(FlaskForm):
-    username = RadioField('你是谁？', choices=["傻猪", "臭猪"])
+    username = RadioField('你是谁？', choices=["傻猪", "臭猪"], validators=[DataRequired()])
+    birthday = StringField('请输入你的生日（YYYYMMDD）', validators=[DataRequired()])
     email = StringField('电子邮箱', validators=[DataRequired(), Email()])
     password = PasswordField('密码', validators=[DataRequired()])
     password2 = PasswordField(
@@ -22,7 +23,7 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
             raise ValidationError('请使用其他用户名')
-
+    
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:

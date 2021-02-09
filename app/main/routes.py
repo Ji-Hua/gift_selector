@@ -9,9 +9,7 @@ from app.forms import LoginForm
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
-    return redirect(url_for('auth.login'))
+    return render_template('index.html', title='首页')
 
 
 # TODO: add logging and email

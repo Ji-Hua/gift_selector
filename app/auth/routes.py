@@ -9,7 +9,7 @@ from app.auth.email import send_password_reset_email, send_confirmation_email
 from app.forms import (LoginForm, RegistrationForm, 
     ResetPasswordRequestForm, ResetPasswordForm)
 from app.auth import bp
-from app.models import User
+from app.models import User, Role
 
 
 @bp.before_app_request
@@ -27,7 +27,7 @@ def login():
         return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('密码或用户名不正确')
             return redirect(url_for('auth.login'))
@@ -84,15 +84,23 @@ def register():
         return redirect(url_for('main.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data,
-            email=form.email.data, password=form.password.data)
-        db.session.add(user)
-        db.session.commit()
+        username = form.username.data
+        roles_dict = {
+            "臭猪": "StinkyPiggy",
+            "傻猪": "SillyPiggy"
+        }
+        role = Role.query.filter_by(name=roles_dict[username]).first()
+        if role.check_validation_hash(str(form.birthday.data)):
+            user = User(username=username, role=role,
+                email=form.email.data, password=form.password.data)
+            db.session.add(user)
+            db.session.commit()
         
-        token = user.generate_confirmation_token()
-        send_confirmation_email(user)
-        flash('确认邮件已发送至您的邮箱，请点击其中链接完成注册')
-        return redirect(url_for('main.index'))
+            send_confirmation_email(user)
+            flash('确认邮件已发送至您的邮箱，请点击其中链接完成注册')
+            return redirect(url_for('main.index'))
+        else:
+            flash('生日输入错误')
     return render_template('auth/register.html', title='注册', form=form)
 
 
@@ -102,7 +110,7 @@ def confirm(token):
     if current_user.confirmed:
         return redirect(url_for('main.index'))
     if current_user.confirm(token):
-        flash('您已完成注册，欢迎加入烂柯游艺社')
+        flash(f'欢迎{current_user.username}')
         return redirect(url_for('main.index'))
     else:
         flash('该链接无效，请重试')

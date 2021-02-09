@@ -37,10 +37,6 @@ class Role(db.Model):
     def check_validation_hash(self, input):
         return check_password_hash(self.validation_hash, input)
     
-    @property
-    def validation_hash(self):
-        raise AttributeError('validation_hash is not a readable attribute')
-
     def __repr__(self):
         return f"<Role {self.name}>"
 
